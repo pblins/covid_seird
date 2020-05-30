@@ -24,15 +24,15 @@ class CountryCovidSeirdTest(CountryCovidSeirdTestBase):
     """Test the covid accessor."""
 
     def test_search_single_return(self):
-        """Test country_search with single return."""
+        """Test code_search with single return."""
         expected = {"BR": "Brazil"}
-        result = CountryCovidSeird.country_search("brazil")
+        result = CountryCovidSeird.code_search("brazil")
         self.assertEqual(expected, result)
 
     def test_search_multiple_returns(self):
-        """Test country_search with multiple returns."""
+        """Test code_search with multiple returns."""
         expected = {"AE": "United Arab Emirates", "GB": "United Kingdom"}
-        result = CountryCovidSeird.country_search("united")
+        result = CountryCovidSeird.code_search("united")
         self.assertEqual(expected, result)
 
     def test_country_covid_seird_initialization_not_ok(self):

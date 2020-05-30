@@ -45,7 +45,7 @@ class CountryCovidSeird:
         )
 
     @classmethod
-    def country_search(cls, country_string: str) -> dict:
+    def code_search(cls, country_string: str) -> dict:
         """Search country code by country name."""
         return dict(
             (k, v)
