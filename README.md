@@ -3,10 +3,10 @@
 **covid-seird** is a small Python package inspired by Henri Froese's post ['Infectious Disease Modelling: Beyond the Basic SIR Model'](https://towardsdatascience.com/infectious-disease-modelling-beyond-the-basic-sir-model-216369c584c4).
 
 It implements the **SEIRD Epidemiological Model** on COVID-19 data.
-- First, it fits a the SEIRD Model into the real timeline data of confirmed cases of COVID-19 of a country.
-- Then, it simulates the SEIRD curves based on the previously fitted Model.
-- As a result, the country Basic reproduction number (R<sub>o</sub>) of COVID-19 is computed.
-- Also, the fit and simulation plots are available.
+- First, it **fits** a the SEIRD Model into the real timeline data of confirmed cases of COVID-19 of a country.
+- Then, it **simulates** the SEIRD curves based on the previously fitted Model.
+- As a result, the country **Basic reproduction number (R<sub>o</sub>)** of COVID-19 is computed.
+- Also, the **fit and simulation plots** are available.
 
 
 NOTE:
@@ -68,4 +68,6 @@ brazil.plot_fit("brazil_fit_plot")
 ```
 a plot file named 'brazil_fit_plot' will be created.
 
-![Image of Yaktocat](https://drive.google.com/file/d/1VHHT0LGxotxvQjzvyC2BM01_Yx_3u-vU/view?usp=sharing)
+![Image of Yaktocat](example/brazil_fit_plot.png)
+
+### SEIRD simulation
