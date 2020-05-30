@@ -50,7 +50,7 @@ brazil.r2
 ```
 output:
 ```python
-0.5714748153246362
+0.9183167162166936
 ```
 Also after fit method's call, the Basic reproduction number (R<sub>o</sub>) will be available:
 

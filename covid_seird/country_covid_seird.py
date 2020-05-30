@@ -117,7 +117,9 @@ class CountryCovidSeird:
 
             mod = Model(_seird)
             model_return = mod.fit(scaled_cases, params, x=x)
-            _, _, r_value, _, _ = linregress(x, scaled_cases)
+            _, _, r_value, _, _ = linregress(
+                model_return.best_fit, scaled_cases
+            )
             self.__fit_return = {
                 "best_fit": model_return.best_fit,
                 "r0": model_return.best_values["r0"],
