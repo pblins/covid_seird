@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages #NOQA
+from setuptools import setup, find_packages  # NOQA
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -20,12 +20,12 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        'COVID19Py',
-        'lmfit',
-        'requests',
-        'pandas',
-        'scipy',
-        'matplotlib',
+        "COVID19Py",
+        "lmfit",
+        "requests",
+        "pandas",
+        "scipy",
+        "matplotlib",
     ],
     python_requires=">=3.6",
 )

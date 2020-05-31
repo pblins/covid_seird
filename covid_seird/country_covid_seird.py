@@ -43,6 +43,7 @@ class CountryCovidSeird:
             data={"confirmed": list(confirmed), "deaths": list(deaths)},
             index=index,
         )
+        self.__data = self.__data[self.__data["confirmed"] > 0]
 
     @classmethod
     def code_search(cls, country_string: str) -> dict:
@@ -151,12 +152,10 @@ class CountryCovidSeird:
         """Plot fit curve."""
         if self.__fit_return is not None:
 
-            x = np.linspace(
-                0.0, len(self.data["confirmed"]), len(self.data["confirmed"])
-            )
+            x = pd.to_datetime(self.data.index)
 
             plt.figure(figsize=(10, 4))
-            plt.plot(x, self.data["confirmed"])
+            plt.plot_date(x, self.data["confirmed"], "-")
             plt.plot(x, self.best_fit)
             plt.legend(
                 [
@@ -165,7 +164,7 @@ class CountryCovidSeird:
                 ]
             )
             plt.title("{} - SEIRD model fit".format(self.name))
-            plt.xlabel("time (days since first confirmed infection)")
+            plt.xlabel("time (since first confirmed infection)")
             plt.ylabel("population")
             if len(filename) != 0:
                 plt.savefig("{}.png".format(filename))
@@ -198,15 +197,17 @@ class CountryCovidSeird:
     def plot_simulation(self, filename: str = ""):
         """Plot SEIRD simulation curves."""
         if self.__simulation_return is not None:
-            x = np.linspace(
-                0.0,
-                len(self.curves["susceptible"]),
-                len(self.curves["susceptible"]),
+
+            real_data = pd.to_datetime(self.data.index)
+            x = pd.date_range(
+                start=real_data[0], periods=len(self.curves["susceptible"]),
             )
+
             f, ax = plt.subplots(1, 1, figsize=(10, 4))
-            ax.plot(
+            ax.plot_date(
                 x,
-                list(map(
+                list(
+                    map(
                         lambda x: x * self.population,
                         self.curves["susceptible"],
                     )
@@ -216,25 +217,21 @@ class CountryCovidSeird:
                 linewidth=2,
                 label="susceptible",
             )
-            ax.plot(
+            ax.plot_date(
                 x,
                 list(
-                    map(
-                        lambda x: x * self.population,
-                        self.curves["exposed"],
-                    )
+                    map(lambda x: x * self.population, self.curves["exposed"],)
                 ),
                 "y",
                 alpha=0.7,
                 linewidth=2,
                 label="exposed",
             )
-            ax.plot(
+            ax.plot_date(
                 x,
                 list(
                     map(
-                        lambda x: x * self.population,
-                        self.curves["infected"],
+                        lambda x: x * self.population, self.curves["infected"],
                     )
                 ),
                 "r",
@@ -242,7 +239,7 @@ class CountryCovidSeird:
                 linewidth=2,
                 label="infected",
             )
-            ax.plot(
+            ax.plot_date(
                 x,
                 list(
                     map(
@@ -255,28 +252,17 @@ class CountryCovidSeird:
                 linewidth=2,
                 label="recovered",
             )
-            ax.plot(
+            ax.plot_date(
                 x,
-                list(
-                    map(
-                        lambda x: x * self.population,
-                        self.curves["dead"],
-                    )
-                ),
+                list(map(lambda x: x * self.population, self.curves["dead"],)),
                 "k",
                 alpha=0.7,
                 linewidth=2,
                 label="dead",
             )
-            ax.plot(
-                list(self.data["confirmed"]),
-                "mo",
-                linewidth=3,
-                label="real data",
-            )
 
             ax.set_ylabel("population")
-            ax.set_xlabel("time (days)")
+            ax.set_xlabel("time (since first confirmed infection)")
 
             ax.yaxis.set_tick_params(length=0)
             ax.xaxis.set_tick_params(length=0)
@@ -285,6 +271,7 @@ class CountryCovidSeird:
             legend.get_frame().set_alpha(0.5)
             for spine in ("top", "right", "bottom", "left"):
                 ax.spines[spine].set_visible(False)
+
             plt.title("{} - SEIRD Simulation".format(self.name))
             if len(filename) != 0:
                 plt.savefig("{}.png".format(filename))
