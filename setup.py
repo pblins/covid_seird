@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="covid-seird",
-    version="0.0.1",
+    version="0.0.2",
     author="Paulo Branco",
     author_email="paulorobertobranco@gmail.com",
     description="""A small package that implements the SEIRD Epidemiological
@@ -20,12 +20,12 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        'COVID19Py',
+        'COVID19Py>=0.3.0',
+        'lmfit>=1.0.1'
         'requests',
         'pandas',
         'scipy',
         'matplotlib',
-        'lmfit'
     ],
     python_requires=">=3.6",
 )
