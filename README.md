@@ -68,7 +68,7 @@ brazil.plot_fit("brazil_fit_plot")
 ```
 a plot file named 'brazil_fit_plot' will be created.
 
-![Image of Yaktocat](example/brazil_fit_plot.png)
+![Image of Yaktocat](examples/brazil_fit_plot.png)
 
 ### SEIRD simulation
 The simulation method receives as a parameter how many days ahead of the real data the SEIRD model will be computed.
@@ -95,4 +95,4 @@ brazil.plot_simulation("brazil_simulation_plot")
 
 a plot file named 'brazil_simulation_plot' will be created.
 
-![Image of Yaktocat](example/brazil_simulation_plot.png)
+![Image of Yaktocat](examples/brazil_simulation_plot.png)
