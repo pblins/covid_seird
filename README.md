@@ -5,16 +5,16 @@
 It implements the **SEIRD Epidemiological Model** on COVID-19 data.
 - First, it **fits** a the SEIRD Model into the real timeline data of confirmed cases of COVID-19 of a country.
 - Then, it **simulates** the SEIRD curves based on the previously fitted Model.
-- As a result, the country **Basic reproduction number (R<sub>o</sub>)** of COVID-19 is computed.
+- As a result, the country's **basic reproduction number (R<sub>o</sub>)** of COVID-19 is computed.
 - Also, the **fit and simulation plots** are available.
 
 
 NOTE:
-  The COVID-19 timelines data are obteined using the [COVID19Py package](https://github.com/Kamaropoulos/COVID19Py) in order to retrieve the Worldwide Data repository operated by the Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE).
+  The COVID-19 timelines data are obtained using the [COVID19Py package](https://github.com/Kamaropoulos/COVID19Py) in order to retrieve the Worldwide Data repository operated by the Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE).
 
 ## Installation
 
-In order install this package, simply run:
+In order to install this package, simply run:
 
 ```bash
 pip install covid-seird
@@ -45,7 +45,7 @@ output:
 ```python
 brazil.fit()
 ```
-After call the fit method, the fit score (R<sup>2</sup>) can be accessed:
+After the fit method's call, the fit score (R<sup>2</sup>) can be accessed:
 ```python
 brazil.r2
 ```
@@ -53,7 +53,7 @@ output:
 ```python
 0.9183167162166936
 ```
-Also after fit method's call, the Basic reproduction number (R<sub>o</sub>) will be available:
+Also after fit method's call, the basic reproduction number (R<sub>o</sub>) will be available:
 
 ```python
 brazil.r0
@@ -76,7 +76,7 @@ The simulation method receives as a parameter how many days ahead of the real da
 ```python
 brazil.simulation(days_ahead=150)
 ```
-After call the simulation method, the SEIRD curves can be accessed:
+The SEIRD curves can be accessed after the simulation method's call
 ```python
 brazil.curves['infected']
 ```
