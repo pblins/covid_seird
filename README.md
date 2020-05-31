@@ -25,7 +25,8 @@ pip install covid-seird
 To use covid-seird, you first need to import the package and then create a new instance, passing the country code as a parameter:
 
 ```python
-from covid_seird.country_covid_seird import CountryCovidSeird
+from covid_seird import CountryCovidSeird
+
 brazil = CountryCovidSeird("br")
 ```
 
