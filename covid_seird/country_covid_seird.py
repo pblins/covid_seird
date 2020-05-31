@@ -102,13 +102,15 @@ class CountryCovidSeird:
     def curves(self):
         """Get SEIRD simulation curves."""
         return (
-            {
-                "susceptible": self.__simulation_return["S"],
-                "exposed": self.__simulation_return["E"],
-                "infected": self.__simulation_return["I"],
-                "recovered": self.__simulation_return["R"],
-                "dead": self.__simulation_return["D"],
-            }
+            pd.DataFrame(
+                data={
+                    "susceptible": self.__simulation_return["S"],
+                    "exposed": self.__simulation_return["E"],
+                    "infected": self.__simulation_return["I"],
+                    "recovered": self.__simulation_return["R"],
+                    "dead": self.__simulation_return["D"],
+                }
+            )
             if self.__simulation_return is not None
             else None
         )
