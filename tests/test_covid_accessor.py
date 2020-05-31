@@ -82,7 +82,7 @@ class CountryCovidSeirdTest(CountryCovidSeirdTestBase):
         """Test simulation method."""
         self.result.fit()
         self.result.simulation(days_ahead=150)
-        self.assertIsNotNone(self.result._CountryCovidSeird__simulation_return)
+        self.assertIsNotNone(self.result.curves)
 
     def test_plot_simulation(self):
         """Test plot simulation method."""

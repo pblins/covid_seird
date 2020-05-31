@@ -98,6 +98,21 @@ class CountryCovidSeird:
             self.__fit_return["r2"] if self.__fit_return is not None else None
         )
 
+    @property
+    def curves(self):
+        """Get SEIRD simulation curves."""
+        return (
+            {
+                "susceptible": self.__simulation_return["S"],
+                "exposed": self.__simulation_return["E"],
+                "infected": self.__simulation_return["I"],
+                "recovered": self.__simulation_return["R"],
+                "dead": self.__simulation_return["D"],
+            }
+            if self.__simulation_return is not None
+            else None
+        )
+
     def fit(self):
         """Fit the real data into the SEIRD model."""
         if self.__fit_return is None:
@@ -182,17 +197,16 @@ class CountryCovidSeird:
         if self.__simulation_return is not None:
             x = np.linspace(
                 0.0,
-                len(self.__simulation_return["S"]),
-                len(self.__simulation_return["S"]),
+                len(self.curves["susceptible"]),
+                len(self.curves["susceptible"]),
             )
             f, ax = plt.subplots(1, 1, figsize=(10, 4))
             ax.plot(
                 x,
-                np.array(
-                    [
-                        i * self.population
-                        for i in self.__simulation_return["S"]
-                    ]
+                list(map(
+                        lambda x: x * self.population,
+                        self.curves["susceptible"],
+                    )
                 ),
                 "b",
                 alpha=0.7,
@@ -201,11 +215,11 @@ class CountryCovidSeird:
             )
             ax.plot(
                 x,
-                np.array(
-                    [
-                        i * self.population
-                        for i in self.__simulation_return["E"]
-                    ]
+                list(
+                    map(
+                        lambda x: x * self.population,
+                        self.curves["exposed"],
+                    )
                 ),
                 "y",
                 alpha=0.7,
@@ -214,11 +228,11 @@ class CountryCovidSeird:
             )
             ax.plot(
                 x,
-                np.array(
-                    [
-                        i * self.population
-                        for i in self.__simulation_return["I"]
-                    ]
+                list(
+                    map(
+                        lambda x: x * self.population,
+                        self.curves["infected"],
+                    )
                 ),
                 "r",
                 alpha=0.7,
@@ -227,11 +241,11 @@ class CountryCovidSeird:
             )
             ax.plot(
                 x,
-                np.array(
-                    [
-                        i * self.population
-                        for i in self.__simulation_return["R"]
-                    ]
+                list(
+                    map(
+                        lambda x: x * self.population,
+                        self.curves["recovered"],
+                    )
                 ),
                 "g",
                 alpha=0.7,
@@ -240,11 +254,11 @@ class CountryCovidSeird:
             )
             ax.plot(
                 x,
-                np.array(
-                    [
-                        i * self.population
-                        for i in self.__simulation_return["D"]
-                    ]
+                list(
+                    map(
+                        lambda x: x * self.population,
+                        self.curves["dead"],
+                    )
                 ),
                 "k",
                 alpha=0.7,

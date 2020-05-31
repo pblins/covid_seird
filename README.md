@@ -71,3 +71,28 @@ a plot file named 'brazil_fit_plot' will be created.
 ![Image of Yaktocat](example/brazil_fit_plot.png)
 
 ### SEIRD simulation
+The simulation method receives as a parameter how many days ahead of the real data the SEIRD model will be computed.
+```python
+brazil.simulation(days_ahead=150)
+```
+After call the simulation method, the SEIRD curves can be accessed:
+```python
+brazil.curves['infected']
+```
+output:
+```python
+array([4.77396851e-09, 5.32992037e-09, 5.95375686e-09, 6.59631344e-09,
+       7.32558927e-09, 8.14396099e-09, 9.05142859e-09, 1.00479921e-08,
+       ...
+       7.48473200e-03, 7.06776956e-03, 6.67386382e-03, 6.30175876e-03,
+       5.95026480e-03, 5.61825534e-03, 5.30466353e-03, 5.00847963e-03])
+```
+
+### Simulation plots
+```python
+brazil.plot_simulation("brazil_simulation_plot")
+```
+
+a plot file named 'brazil_simulation_plot' will be created.
+
+![Image of Yaktocat](example/brazil_simulation_plot.png)
