@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="covid-seird",
-    version="0.0.4",
+    version="0.0.5",
     author="Paulo Branco",
     author_email="paulorobertobranco@gmail.com",
     description="""A small package that implements the SEIRD Epidemiological
