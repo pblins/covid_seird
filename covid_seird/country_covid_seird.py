@@ -145,7 +145,7 @@ class CountryCovidSeird:
                 "rho": model_return.best_values["rho"],
             }
 
-    def plot_fit(self, filename: str):
+    def plot_fit(self, filename: str = ""):
         """Plot fit curve."""
         if self.__fit_return is not None:
 
@@ -165,8 +165,9 @@ class CountryCovidSeird:
             plt.title("{} - SEIRD model fit".format(self.name))
             plt.xlabel("time (days since first confirmed infection)")
             plt.ylabel("population")
-            plt.savefig("{}.png".format(filename))
-            plt.close()
+            if len(filename) != 0:
+                plt.savefig("{}.png".format(filename))
+            return plt
 
     def simulation(self, days_ahead: int = 100):
         """Compute the seird model simulation curves."""
@@ -192,7 +193,7 @@ class CountryCovidSeird:
 
             self.__simulation_return = {"S": S, "E": E, "I": I, "R": R, "D": D}
 
-    def plot_simulation(self, filename: str):
+    def plot_simulation(self, filename: str = ""):
         """Plot SEIRD simulation curves."""
         if self.__simulation_return is not None:
             x = np.linspace(
@@ -283,8 +284,9 @@ class CountryCovidSeird:
             for spine in ("top", "right", "bottom", "left"):
                 ax.spines[spine].set_visible(False)
             plt.title("{} - SEIRD Simulation".format(self.name))
-            plt.savefig("{}.png".format(filename))
-            plt.close()
+            if len(filename) != 0:
+                plt.savefig("{}.png".format(filename))
+            return plt
 
 
 def _seird(x, r0, gamma, delta, alpha, rho, population, fit):

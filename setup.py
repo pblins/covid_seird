@@ -19,5 +19,13 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    install_requires=[
+        'COVID19Py',
+        'requests',
+        'pandas',
+        'scipy',
+        'matplotlib',
+        'lmfit'
+    ],
     python_requires=">=3.6",
 )
