@@ -1,3 +1,14 @@
+
+# [covid-seird](https://pypi.org/project/covid-seird/)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![Downloads](https://pepy.tech/badge/covid-seird)](https://pepy.tech/project/covid-seird)
+[![Downloads](https://pepy.tech/badge/covid-seird/month)](https://pepy.tech/project/covid-seird/month)
+[![Downloads](https://pepy.tech/badge/covid-seird/week)](https://pepy.tech/project/covid-seird/week)
+[![MIT License](https://img.shields.io/github/license/paulorobertobranco/covid_seird)](https://opensource.org/licenses/)
+[![HitCount](https://hits.dwyl.com/paulorobertobranco/covid-seird.svg)](http://hits.dwyl.com/paulorobertobranco/covid-seird)
+[![GitHub stars](https://img.shields.io/github/stars/paulorobertobranco/covid_seird.svg?style=social&label=Star)](https://github.com/paulorobertobranco/covid_seird)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 ## About
 
 **covid-seird** is a small Python package inspired by Henri Froese's post ['Infectious Disease Modelling: Beyond the Basic SIR Model'](https://towardsdatascience.com/infectious-disease-modelling-beyond-the-basic-sir-model-216369c584c4).
