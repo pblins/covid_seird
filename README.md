@@ -2,8 +2,6 @@
 # [covid-seird](https://pypi.org/project/covid-seird/)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![Downloads](https://pepy.tech/badge/covid-seird)](https://pepy.tech/project/covid-seird)
-[![Downloads](https://pepy.tech/badge/covid-seird/month)](https://pepy.tech/project/covid-seird/month)
-[![Downloads](https://pepy.tech/badge/covid-seird/week)](https://pepy.tech/project/covid-seird/week)
 [![MIT License](https://img.shields.io/github/license/paulorobertobranco/covid_seird)](https://opensource.org/licenses/)
 [![HitCount](https://hits.dwyl.com/paulorobertobranco/covid-seird.svg)](http://hits.dwyl.com/paulorobertobranco/covid-seird)
 [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/paulorobertobranco/covid_seird)](https://www.codefactor.io/repository/github/paulorobertobranco/covid_seird/overview/master)
