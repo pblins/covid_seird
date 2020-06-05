@@ -6,7 +6,8 @@
 [![Downloads](https://pepy.tech/badge/covid-seird/week)](https://pepy.tech/project/covid-seird/week)
 [![MIT License](https://img.shields.io/github/license/paulorobertobranco/covid_seird)](https://opensource.org/licenses/)
 [![HitCount](https://hits.dwyl.com/paulorobertobranco/covid-seird.svg)](http://hits.dwyl.com/paulorobertobranco/covid-seird)
-[![GitHub stars](https://img.shields.io/github/stars/paulorobertobranco/covid_seird.svg?style=social&label=Star)](https://github.com/paulorobertobranco/covid_seird)
+[![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/paulorobertobranco/covid_seird)](https://www.codefactor.io/repository/github/paulorobertobranco/covid_seird/overview/master)
+![GitHub repo size](https://img.shields.io/github/repo-size/paulorobertobranco/covid_seird)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## About
