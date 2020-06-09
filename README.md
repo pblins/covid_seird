@@ -61,7 +61,7 @@ brazil.r2
 ```
 output:
 ```python
-0.8197939079292966
+0.797994368607109
 ```
 Also after fit method's call, the basic reproduction number (R<sub>o</sub>) will be available:
 
@@ -70,7 +70,7 @@ brazil.r0
 ```
 output:
 ```python
-2.4712309845245866
+2.280428864655168
 ```
 ### Fit plot
 

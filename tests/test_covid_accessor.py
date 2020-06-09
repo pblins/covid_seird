@@ -5,6 +5,8 @@ from unittest import TestCase
 import pandas as pd
 from requests.exceptions import HTTPError
 
+from covid_seird.exceptions import (NoFitError,
+                                    NoSimulationError)
 from covid_seird.country_covid_seird import CountryCovidSeird
 
 
@@ -55,9 +57,15 @@ class CountryCovidSeirdTest(CountryCovidSeirdTestBase):
         self.assertEqual(population, self.result.population)
         self.assertTrue(isinstance(self.result.data, pd.DataFrame))
         self.assertFalse(self.result.data.empty)
-        self.assertIsNone(self.result.r2)
-        self.assertIsNone(self.result.r0)
-        self.assertIsNone(self.result.best_fit)
+
+    def test_fit_no_call(self):
+        """Test no fit exception."""
+        with self.assertRaises(NoFitError):
+            self.result.r0
+        with self.assertRaises(NoFitError):
+            self.result.r2
+        with self.assertRaises(NoFitError):
+            self.result.best_fit
 
     def test_fit(self):
         """Test fit method."""
@@ -77,6 +85,11 @@ class CountryCovidSeirdTest(CountryCovidSeirdTestBase):
                 "/home/prlins/Documentos/covid_seird_model/test_plot_fit.png"
             )
         )
+
+    def test_fit_no_simulation(self):
+        """Test no fit exception."""
+        with self.assertRaises(NoSimulationError):
+            self.result.curves
 
     def test_simulation(self):
         """Test simulation method."""

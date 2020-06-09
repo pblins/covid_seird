@@ -1,4 +1,6 @@
-"""Covid accessor."""
+"""Implementation of SEIRD Epidemiological Model on COVID-19 data."""
+from typing import Dict
+
 import COVID19Py
 import numpy as np
 import pandas as pd
@@ -6,6 +8,9 @@ import matplotlib.pyplot as plt
 from scipy.stats import linregress
 from scipy.integrate import odeint
 from lmfit import Model, Parameters
+
+from covid_seird.exceptions import NoFitError
+from covid_seird.exceptions import NoSimulationError
 
 
 class CountryCovidSeird:
@@ -22,7 +27,13 @@ class CountryCovidSeird:
     )
 
     def __init__(self, code: str):
-        """Class initialization."""
+        """Class initialization.
+
+        Parameters
+        ----------
+            - code: country code.
+
+        """
         country_data = CountryCovidSeird.__covid_data.getLocationByCountryCode(
             code.upper(), timelines=True
         )
@@ -46,8 +57,14 @@ class CountryCovidSeird:
         self.__data = self.__data[self.__data["confirmed"] > 0]
 
     @classmethod
-    def code_search(cls, country_string: str) -> dict:
-        """Search country code by country name."""
+    def code_search(cls, country_string: str) -> Dict[str, str]:
+        """Search country code by country name.
+
+        Parameters
+        ----------
+            - country_string: string to be searched in the locations list.
+
+        """
         return dict(
             (k, v)
             for k, v in cls.__location_dict.items()
@@ -55,65 +72,61 @@ class CountryCovidSeird:
         )
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Get the name."""
         return self.__name
 
     @property
-    def code(self):
+    def code(self) -> str:
         """Get the code."""
         return self.__code
 
     @property
-    def population(self):
+    def population(self) -> int:
         """Get the population size."""
         return self.__population
 
     @property
-    def data(self):
+    def data(self) -> pd.DataFrame:
         """Get the covid data."""
         return self.__data
 
     @property
-    def best_fit(self):
+    def best_fit(self) -> np.ndarray:
         """Get best fit."""
-        return (
-            np.array(
-                [i * self.population for i in self.__fit_return["best_fit"]]
-            )
-            if self.__fit_return is not None
-            else None
+        if self.__fit_return is None:
+            raise NoFitError()
+        return np.array(
+            [i * self.population for i in self.__fit_return["best_fit"]]
         )
 
     @property
-    def r0(self):
+    def r0(self) -> np.float64:
         """Get r0."""
-        return (
-            self.__fit_return["r0"] if self.__fit_return is not None else None
-        )
+        if self.__fit_return is None:
+            raise NoFitError()
+        return self.__fit_return["r0"]
 
     @property
-    def r2(self):
+    def r2(self) -> np.float64:
         """Get r2."""
-        return (
-            self.__fit_return["r2"] if self.__fit_return is not None else None
-        )
+        if self.__fit_return is None:
+            raise NoFitError()
+        return self.__fit_return["r2"]
 
     @property
-    def curves(self):
+    def curves(self) -> pd.DataFrame:
         """Get SEIRD simulation curves."""
-        return (
-            pd.DataFrame(
-                data={
-                    "susceptible": self.__simulation_return["S"],
-                    "exposed": self.__simulation_return["E"],
-                    "infected": self.__simulation_return["I"],
-                    "recovered": self.__simulation_return["R"],
-                    "dead": self.__simulation_return["D"],
-                }
-            )
-            if self.__simulation_return is not None
-            else None
+        if self.__simulation_return is None:
+            raise NoSimulationError()
+        return pd.DataFrame(
+            data={
+                "susceptible": self.__simulation_return["S"],
+                "exposed": self.__simulation_return["E"],
+                "infected": self.__simulation_return["I"],
+                "recovered": self.__simulation_return["R"],
+                "dead": self.__simulation_return["D"],
+            }
         )
 
     def fit(self):
@@ -149,7 +162,13 @@ class CountryCovidSeird:
             }
 
     def plot_fit(self, filename: str = ""):
-        """Plot fit curve."""
+        """Plot fit curve.
+
+        Parameters
+        ----------
+            - filename: output PNG file name.
+
+        """
         if self.__fit_return is not None:
 
             x = pd.to_datetime(self.data.index)
@@ -171,7 +190,13 @@ class CountryCovidSeird:
             return plt
 
     def simulation(self, days_ahead: int = 100):
-        """Compute the seird model simulation curves."""
+        """Compute the seird model simulation curves.
+
+        Parameters
+        ----------
+            - days_ahead: day ahead of real data to be simulated.
+
+        """
         if self.__fit_return is not None:
             scaled_cases = np.array(
                 [i / self.population for i in self.data["confirmed"]]
@@ -195,7 +220,13 @@ class CountryCovidSeird:
             self.__simulation_return = {"S": S, "E": E, "I": I, "R": R, "D": D}
 
     def plot_simulation(self, filename: str = ""):
-        """Plot SEIRD simulation curves."""
+        """Plot SEIRD simulation curves.
+
+        Parameters
+        ----------
+            - filename: output PNG file name.
+
+        """
         if self.__simulation_return is not None:
 
             real_data = pd.to_datetime(self.data.index)
