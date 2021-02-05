@@ -3,6 +3,11 @@ from setuptools import setup, find_packages  # NOQA
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+def read(filename):
+    return [
+        req.strip() for req in open(filename).readlines()
+    ]
+
 setup(
     name="covid-seird",
     version="0.0.7",
@@ -19,13 +24,6 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=[
-        "COVID19Py",
-        "lmfit",
-        "requests",
-        "pandas",
-        "scipy",
-        "matplotlib",
-    ],
+    install_requires=read('requirements.txt'),
     python_requires=">=3.6",
 )

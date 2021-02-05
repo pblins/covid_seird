@@ -2,15 +2,14 @@
 from typing import Dict
 
 import COVID19Py
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from scipy.stats import linregress
-from scipy.integrate import odeint
 from lmfit import Model, Parameters
+from scipy.integrate import odeint
+from scipy.stats import linregress
 
-from covid_seird.exceptions import NoFitError
-from covid_seird.exceptions import NoSimulationError
+from covid_seird.exceptions import NoFitError, NoSimulationError
 
 
 class CountryCovidSeird:
@@ -55,6 +54,9 @@ class CountryCovidSeird:
             index=index,
         )
         self.__data = self.__data[self.__data["confirmed"] > 0]
+
+    def __repr__(self):
+        return f"<CountryCovidSeird ({self.name})>"
 
     @classmethod
     def code_search(cls, country_string: str) -> Dict[str, str]:
@@ -169,7 +171,7 @@ class CountryCovidSeird:
             - filename: output PNG file name.
 
         """
-        if self.__fit_return is not None:
+        if self.__fit_return:
 
             x = pd.to_datetime(self.data.index)
 
@@ -182,12 +184,14 @@ class CountryCovidSeird:
                     "fit (R2: {:.2f} | R0: {:.2f})".format(self.r2, self.r0),
                 ]
             )
-            plt.title("{} - SEIRD model fit".format(self.name))
+            plt.title(f"{self.name} - SEIRD model fit")
             plt.xlabel("time (since first confirmed infection)")
             plt.ylabel("population")
-            if len(filename) != 0:
-                plt.savefig("{}.png".format(filename))
-            return plt
+            if filename:
+                plt.savefig(f"{filename}.png")
+            plt.close()
+        else:
+            raise NoFitError
 
     def simulation(self, days_ahead: int = 100):
         """Compute the seird model simulation curves.
@@ -227,7 +231,7 @@ class CountryCovidSeird:
             - filename: output PNG file name.
 
         """
-        if self.__simulation_return is not None:
+        if self.__simulation_return:
 
             real_data = pd.to_datetime(self.data.index)
             x = pd.date_range(
@@ -303,10 +307,12 @@ class CountryCovidSeird:
             for spine in ("top", "right", "bottom", "left"):
                 ax.spines[spine].set_visible(False)
 
-            plt.title("{} - SEIRD Simulation".format(self.name))
-            if len(filename) != 0:
-                plt.savefig("{}.png".format(filename))
-            return plt
+            plt.title(f"{self.name} - SEIRD Simulation")
+            if filename:
+                plt.savefig(f"{filename}.png")
+            plt.close()
+        else:
+            raise NoSimulationError
 
 
 def _seird(x, r0, gamma, delta, alpha, rho, population, fit):
