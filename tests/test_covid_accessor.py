@@ -78,11 +78,11 @@ class CountryCovidSeirdTest(CountryCovidSeirdTestBase):
         """Test plot fit method."""
         self.result.fit()
         self.result.plot_fit(
-            "/home/prlins/Documentos/covid_seird_model/test_plot_fit"
+            "./test_plot_fit"
         )
         self.assertTrue(
             isfile(
-                "/home/prlins/Documentos/covid_seird_model/test_plot_fit.png"
+                "./test_plot_fit.png"
             )
         )
 
@@ -102,10 +102,10 @@ class CountryCovidSeirdTest(CountryCovidSeirdTestBase):
         self.result.fit()
         self.result.simulation(days_ahead=150)
         self.result.plot_simulation(
-            "/home/prlins/Documentos/covid_seird_model/test_plot_simulation"
+            "./test_plot_simulation"
         )
         self.assertTrue(
             isfile(
-                "/home/prlins/Documentos/covid_seird_model/test_plot_simulation.png"
+                "./test_plot_simulation.png"
             )
         )

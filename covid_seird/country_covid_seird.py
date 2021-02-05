@@ -238,7 +238,7 @@ class CountryCovidSeird:
                 start=real_data[0], periods=len(self.curves["susceptible"]),
             )
 
-            f, ax = plt.subplots(1, 1, figsize=(10, 4))
+            _, ax = plt.subplots(1, 1, figsize=(10, 4))
             ax.plot_date(
                 x,
                 list(
