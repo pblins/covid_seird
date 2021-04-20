@@ -6,7 +6,7 @@ class NoFitError(Exception):
 
     def __init__(self):
         """Exception initialization."""
-        super().__init__("No fit was found.")
+        super().__init__("No fit was found. You should consider run the fit method before plotting.")
 
 
 class NoSimulationError(Exception):
@@ -14,4 +14,4 @@ class NoSimulationError(Exception):
 
     def __init__(self):
         """Exception initialization."""
-        super().__init__("No simulation was found.")
+        super().__init__("No simulation was found. You should consider run the simulation method before plotting.")
